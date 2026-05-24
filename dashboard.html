@@ -488,18 +488,27 @@ new Chart(document.getElementById('c-mix'),{
 // Scontrino medio
 const smAnni = Object.keys(D.sm).map(Number).sort().reverse();
 const smColors = ['#185FA5','#1D9E75','#B4B2A9'];
-const legSm = document.getElementById('legend-sm');
-legSm.innerHTML = smAnni.map((a,i)=>`<span><span class="dot" style="background:${smColors[i]}"></span>${a}</span>`).join('');
-new Chart(document.getElementById('c-sm'),{
-  type:'line',
-  data:{labels:D.mesi,datasets:smAnni.map((anno,i)=>{return{
-    label:String(anno),data:D.sm[anno],
-    borderColor:smColors[i],fill:false,tension:0.3,pointRadius:3,
-    borderDash:i>0?[4,4]:[]
-  };})},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': €'+c.raw.toFixed(2)}}},scales:{y:{ticks:{callback:v=>'€'+v.toFixed(0),font:{size:10}},grid:{color:'rgba(0,0,0,0.06)'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}
-});
-
+let chartSm = null;
+function buildSmChart(mode) {
+  ['sc','pax'].forEach(m=>document.getElementById('tab-sm-'+m)?.classList.toggle('active',m===mode));
+  const src = mode === 'pax' ? D.sm_pax : D.sm;
+  const legSm = document.getElementById('legend-sm');
+  legSm.innerHTML = smAnni.map((a,i)=>`<span><span class="dot" style="background:${smColors[i]}"></span>${a}</span>`).join('');
+  if(chartSm) chartSm.destroy();
+  chartSm = new Chart(document.getElementById('c-sm'),{
+    type:'line',
+    data:{labels:D.mesi,datasets:smAnni.map((anno,i)=>{return{
+      label:String(anno),data:(src[anno]||Array(12).fill(null)),
+      borderColor:smColors[i],fill:false,tension:0.3,pointRadius:3,
+      borderDash:i>0?[4,4]:[],spanGaps:true
+    };})}},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': €'+(c.raw||0).toFixed(2)}}},
+      scales:{y:{ticks:{callback:v=>'€'+v.toFixed(0),font:{size:10}},grid:{color:'rgba(0,0,0,0.06)'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}
+  });
+}
+window.setSmMode = buildSmChart;
+buildSmChart('sc');
 // Quindicine mensili con selezione anno + trimestre
 // Grafico PAX mensili
 let chartPax = null;
