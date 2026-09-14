@@ -306,15 +306,15 @@ function setPagPeriodo(key) {
       +'</div></div>';
   });
   if(_chartPagPeriodo) _chartPagPeriodo.destroy();
-  _chartPagPeriodo=new Chart(document.getElementById('c-pag-periodo'),{type:'bar',
+  _chartPagPeriodo=new Chart(document.getElementById('c-pag-periodo'),{
+    type:'bar',
     data:{labels:['Appio','N Antro','Totale'],datasets:[
       {label:'Fiscalizzato',data:[pd.appio.fiscalizzato,pd.nantro.fiscalizzato,pd.totale.fiscalizzato],backgroundColor:'#185FA5',borderRadius:3},
       {label:'Altro',data:[pd.appio.altro,pd.nantro.altro,pd.totale.altro],backgroundColor:'#D85A30',borderRadius:3}
-    ]}},
+    ]},
     options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:true,labels:{font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+fmt(c.raw);}}}},
-      scales:{x:{ticks:{font:{size:11}},grid:{display:false}},
-               y:{ticks:{callback:function(v){return '€'+(v>=1000?(v/1000).toFixed(0)+'k':Math.round(v));},font:{size:10}},grid:{color:'rgba(0,0,0,0.06)'}}}
+      plugins:{legend:{display:true,labels:{font:{size:10}}},tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fmt(ctx.raw);}}}},
+      scales:{x:{ticks:{font:{size:11}},grid:{display:false}},y:{ticks:{callback:function(v){return '€'+(v>=1000?(v/1000).toFixed(0)+'k':Math.round(v));},font:{size:10}},grid:{color:'rgba(0,0,0,0.06)'}}}
     }
   });
 }
