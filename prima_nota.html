@@ -67,10 +67,15 @@ h1{font-size:20px;font-weight:400;margin-bottom:4px}
   <div class="box" id="box-paghe"></div>
 </div>
 
+<div style="margin-bottom:16px">
+  <p class="section-title">Fatture Ricevute (per anno di competenza)</p>
+  <div class="box" id="box-fatture"></div>
+</div>
+
 <p class="updated" id="pn-updated"></p>
 
 <script>
-const D = {"periodi": {"ytd": {"inc_fiscalizzato": 513465.79, "inc_altro": 57329.31, "inc_totale": 570795.1, "sp_non_fatt": 1223.03, "sp_fatt_carta": 32450.85, "sp_fatt_cont": 32597.02, "sp_fatt_saldo": 58039.15, "sp_fatt_tot": 123087.02, "paghe_netto": 31022.0, "paghe_contrib": 8762.11, "paghe_tot": 43157.02, "saldo_nero": 56106.28, "saldo_fisc": 347221.75, "saldo_tot": 403328.03, "n_chiusure": 444, "n_spese": 616}, "trimestre": {"inc_fiscalizzato": 146240.02, "inc_altro": 18408.4, "inc_totale": 164648.42, "sp_non_fatt": 657.35, "sp_fatt_carta": 11593.09, "sp_fatt_cont": 7820.73, "sp_fatt_saldo": 21202.7, "sp_fatt_tot": 40616.52, "paghe_netto": 18067.0, "paghe_contrib": 4724.62, "paghe_tot": 24562.72, "saldo_nero": 17751.05, "saldo_fisc": 81060.78, "saldo_tot": 98811.83, "n_chiusure": 124, "n_spese": 199}, "mese": {"inc_fiscalizzato": 26880.24, "inc_altro": 5932.19, "inc_totale": 32812.43, "sp_non_fatt": 150.0, "sp_fatt_carta": 2097.6, "sp_fatt_cont": 3011.95, "sp_fatt_saldo": 3320.02, "sp_fatt_tot": 8429.57, "paghe_netto": 0, "paghe_contrib": 0, "paghe_tot": 0, "saldo_nero": 5782.19, "saldo_fisc": 18450.67, "saldo_tot": 24232.86, "n_chiusure": 17, "n_spese": 51}, "7giorni": {"inc_fiscalizzato": 14917.11, "inc_altro": 2747.03, "inc_totale": 17664.14, "sp_non_fatt": 40.0, "sp_fatt_carta": 1460.62, "sp_fatt_cont": 1708.05, "sp_fatt_saldo": 494.15, "sp_fatt_tot": 3662.82, "paghe_netto": 0, "paghe_contrib": 0, "paghe_tot": 0, "saldo_nero": 2707.03, "saldo_fisc": 11254.29, "saldo_tot": 13961.32, "n_chiusure": 10, "n_spese": 25}}, "meta": {"ultima_data": "14/09/2026", "anno_cur": 2026, "mese_label": "Set 2026", "trim_label": "Q3 2026", "7g_label": "08/09 → 14/09/2026"}};
+const D = {"periodi": {"ytd": {"inc_fiscalizzato": 510173.79, "inc_altro": 56506.21, "inc_totale": 566680.0, "sp_non_fatt": 0, "sp_fatt_carta": 0, "sp_fatt_cont": 0, "sp_fatt_saldo": 0, "sp_fatt_tot": 0, "paghe_netto": 31022.0, "paghe_contrib": 8762.11, "paghe_tot": 43157.02, "saldo_nero": 56506.21, "saldo_fisc": 467016.77, "saldo_tot": 523522.98, "ft_totale": 2472.4, "ft_per_cat": [["Varie", 2105.3], ["Vini e Spirits", 204.19], ["Pesce e frutti di mare", 162.91]], "saldo_fisc_con_ft": 464544.37, "n_chiusure": 255, "n_spese": 0}, "trimestre": {"inc_fiscalizzato": 142948.02, "inc_altro": 17585.3, "inc_totale": 160533.32, "sp_non_fatt": 0, "sp_fatt_carta": 0, "sp_fatt_cont": 0, "sp_fatt_saldo": 0, "sp_fatt_tot": 0, "paghe_netto": 18067.0, "paghe_contrib": 4724.62, "paghe_tot": 24562.72, "saldo_nero": 17585.3, "saldo_fisc": 118385.3, "saldo_tot": 135970.6, "ft_totale": 2472.4, "ft_per_cat": [["Varie", 2105.3], ["Vini e Spirits", 204.19], ["Pesce e frutti di mare", 162.91]], "saldo_fisc_con_ft": 115912.9, "n_chiusure": 74, "n_spese": 0}, "mese": {"inc_fiscalizzato": 23588.24, "inc_altro": 5109.09, "inc_totale": 28697.33, "sp_non_fatt": 0, "sp_fatt_carta": 0, "sp_fatt_cont": 0, "sp_fatt_saldo": 0, "sp_fatt_tot": 0, "paghe_netto": 0, "paghe_contrib": 0, "paghe_tot": 0, "saldo_nero": 5109.09, "saldo_fisc": 23588.24, "saldo_tot": 28697.33, "ft_totale": 2472.4, "ft_per_cat": [["Varie", 2105.3], ["Vini e Spirits", 204.19], ["Pesce e frutti di mare", 162.91]], "saldo_fisc_con_ft": 21115.84, "n_chiusure": 12, "n_spese": 0}, "7giorni": {"inc_fiscalizzato": 14859.11, "inc_altro": 2915.43, "inc_totale": 17774.54, "sp_non_fatt": 0, "sp_fatt_carta": 0, "sp_fatt_cont": 0, "sp_fatt_saldo": 0, "sp_fatt_tot": 0, "paghe_netto": 0, "paghe_contrib": 0, "paghe_tot": 0, "saldo_nero": 2915.43, "saldo_fisc": 14859.11, "saldo_tot": 17774.54, "ft_totale": 2472.4, "ft_per_cat": [["Varie", 2105.3], ["Vini e Spirits", 204.19], ["Pesce e frutti di mare", 162.91]], "saldo_fisc_con_ft": 12386.71, "n_chiusure": 7, "n_spese": 0}}, "meta": {"ultima_data": "12/09/2026", "anno_cur": 2026, "mese_label": "Set 2026", "trim_label": "Q3 2026", "7g_label": "06/09 → 12/09/2026"}};
 const fmt = v => '€' + Math.round(Math.abs(v)).toLocaleString('it-IT');
 const fmtS = v => (v>=0?'+':'-')+' €'+Math.round(Math.abs(v)).toLocaleString('it-IT');
 const _labels = {
@@ -98,7 +103,7 @@ function setPeriodo(key) {
   sb.innerHTML = [
     ['Saldo Nero', p.saldo_nero],
     ['Saldo Fiscalizzato', p.saldo_fisc],
-    ['Saldo Totale', p.saldo_tot],
+    ['Saldo con Fatture', p.saldo_fisc_con_ft],
   ].map(function(s) {
     var cls = s[1] >= 0 ? 'pos' : 'neg';
     return '<div class="saldo-item '+cls+'"><div class="saldo-label">'+s[0]+'</div><div class="saldo-val">'+fmtS(s[1])+'</div></div>';
@@ -111,7 +116,9 @@ function setPeriodo(key) {
     + row('Spese fatturate contanti', '', '-'+fmt(p.sp_fatt_cont), 'uscita')
     + row('Da saldare', '', '-'+fmt(p.sp_fatt_saldo), 'uscita')
     + row('Stipendi + contributi', '', '-'+fmt(p.paghe_tot), 'uscita')
-    + row('Saldo fiscalizzato', '', fmtS(p.saldo_fisc), 'saldo '+(p.saldo_fisc>=0?'pos':'neg'));
+    + row('Saldo (senza fatture)', '', fmtS(p.saldo_fisc), 'saldo '+(p.saldo_fisc>=0?'pos':'neg'))
+    + row('Fatture ricevute', 'per anno competenza', '-'+fmt(p.ft_totale), 'uscita')
+    + row('Saldo (con fatture)', '', fmtS(p.saldo_fisc_con_ft), 'saldo '+(p.saldo_fisc_con_ft>=0?'pos':'neg'));
 
   // Cassa nera
   var bn = document.getElementById('box-nero');
@@ -124,6 +131,19 @@ function setPeriodo(key) {
   bp.innerHTML = row('Stipendi netti', 'in busta paga', fmt(p.paghe_netto), 'uscita')
     + row('Contributi INPS/INAIL', '', fmt(p.paghe_contrib), 'uscita')
     + row('Costo totale personale', '', fmt(p.paghe_tot), 'saldo neg');
+
+  // Fatture
+  var bft = document.getElementById('box-fatture');
+  var ftHtml = row('Totale fatture ricevute', 'per anno di competenza', fmt(p.ft_totale), 'uscita');
+  if(p.ft_per_cat && p.ft_per_cat.length) {
+    ftHtml += '<div style="margin-top:10px;padding-top:10px;border-top:0.5px solid #f0ede6">';
+    p.ft_per_cat.forEach(function(cat) {
+      var pct = p.ft_totale>0 ? ' ('+(((cat[1]/p.ft_totale)*100).toFixed(0))+'%)' : '';
+      ftHtml += row(cat[0], pct, fmt(cat[1]), '');
+    });
+    ftHtml += '</div>';
+  }
+  bft.innerHTML = ftHtml;
 }
 
 setPeriodo('ytd');
